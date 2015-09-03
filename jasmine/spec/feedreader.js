@@ -68,7 +68,7 @@ $(function() {
      * a single .entry element within the .feed container.
      */
     describe('Initial Entries', function() {
-        function testEntryLength(index, name) {
+        function testFeedContainsEntry(index, name) {
             beforeEach(function(done) {
                 loadFeed(index, function() {
                     done();
@@ -82,7 +82,7 @@ $(function() {
 
         var allFeedsLength = allFeeds.length;
         for (var i = 0; i < allFeedsLength; i++) {
-            testEntryLength(i, allFeeds[i].name);
+            testFeedContainsEntry(i, allFeeds[i].name);
         }
     });
 
