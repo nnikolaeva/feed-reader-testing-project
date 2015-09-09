@@ -127,8 +127,6 @@ $(function() {
             });
         });
         it('changes content', function(done) {
-            console.log(firstResultArray.length);
-            console.log(secondResultArray.length);
             var length;
             var lengthFirst = firstResultArray.length;
             var lengthSecond = secondResultArray.length;
