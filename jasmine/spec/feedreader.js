@@ -48,7 +48,7 @@ $(function() {
         /* test ensures the menu element is hidden by default. 
          */
         it('hidden by default', function() {
-            expect($('body').attr("class")).toBe("menu-hidden");
+            expect($('body').hasClass("menu-hidden")).toBe(true);
         });
 
         /* test ensures that the menu changes
@@ -56,10 +56,10 @@ $(function() {
          */
         it('changes visibility when the menu icon is clicked', function() {
             $('.menu-icon-link').click();
-            expect($('body').attr("class")).not.toBe("menu-hidden");
+            expect($('body').hasClass("menu-hidden")).toBe(false);
 
             $('.menu-icon-link').click();
-            expect($('body').attr("class")).toBe("menu-hidden");
+            expect($('body').hasClass("menu-hidden")).toBe(true);
         });
     });
 
@@ -92,32 +92,43 @@ $(function() {
     describe('New Feed Selection', function() {
         var firstResultArray = [];
         var secondResultArray = [];
+        var href;
+        var h2;
+        var p;
 
         beforeEach(function(done) {
             loadFeed(0, function() {
-                var entryLink = {};
                 $('.feed .entry-link').each(function(item) {
-                    entryLink.href = $(this).attr('href');
-                    entryLink.h2 = $(this).find('h2').text();
-                    entryLink.p = $(this).find('p').text();
-                    firstResultArray.push(entryLink);
+                    href = $(this).attr('href');
+                    h2 = $(this).find('h2').text();
+                    p = $(this).find('p').text();
+                    firstResultArray.push({
+                        href: href,
+                        h2: h2,
+                        p: p
+                    });
                 });
                 done();
             });
         });
         beforeEach(function(done) {
             loadFeed(1, function() {
-                var entryLink = {};
                 $('.feed .entry-link').each(function(item) {
-                    entryLink.href = $(this).attr('href');
-                    entryLink.h2 = $(this).find('h2').text();
-                    entryLink.p = $(this).find('p').text();
-                    secondResultArray.push(entryLink);
+                    href = $(this).attr('href');
+                    h2 = $(this).find('h2').text();
+                    p = $(this).find('p').text();
+                    secondResultArray.push({
+                        href: href,
+                        h2: h2,
+                        p: p
+                    });
                 });
                 done();
             });
         });
         it('changes content', function(done) {
+            console.log(firstResultArray.length);
+            console.log(secondResultArray.length);
             var length;
             var lengthFirst = firstResultArray.length;
             var lengthSecond = secondResultArray.length;
